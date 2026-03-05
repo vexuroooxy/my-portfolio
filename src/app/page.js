@@ -1,7 +1,6 @@
 export default function Home() {
   return (
-    // Tambahkan 'dark' di sini jika ingin ngetest manual, atau biarkan adaptif ke sistem
-    <main className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-500">
+    <main className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-500`">
       {/* NAVBAR */}
       <nav className="fixed top-0 w-full z-50 backdrop-blur-lg border-b border-slate-100 dark:border-slate-800 bg-white/70 dark:bg-slate-950/70">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -83,21 +82,6 @@ export default function Home() {
             </span>
             .
           </p>
-
-          <div className="flex gap-4 justify-center">
-            <a
-              href="#contact"
-              className="px-8 py-3 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30"
-            >
-              Contact Me
-            </a>
-            <a
-              href="#projects"
-              className="px-8 py-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-full font-bold hover:bg-slate-50 transition"
-            >
-              View Projects
-            </a>
-          </div>
         </div>
       </section>
 
