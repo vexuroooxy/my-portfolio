@@ -1,4 +1,7 @@
+"use client";
+import { useState } from "react";
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <main className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-500`">
       {/* NAVBAR */}
@@ -35,20 +38,70 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="md:hidden">
-            <svg
-              className="w-6 h-6 text-slate-900 dark:text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          {/* Button Mobile Hamburger */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-slate-900 dark:text-white p-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
+              {/* Ikon bakal ganti jadi 'X' kalau menu kebuka */}
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {isOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          {/* Menu Mobile (Dropdown) */}
+          <div
+            className={`${isOpen ? "block" : "hidden"} md:hidden absolute top-16 left-0 w-full bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800 p-6 flex flex-col gap-4 shadow-xl transition-all`}
+          >
+            <a
+              href="#"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-blue-600"
+            >
+              Home
+            </a>
+            <a
+              href="#about"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-blue-600"
+            >
+              About
+            </a>
+            <a
+              href="#projects"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-blue-600"
+            >
+              Projects
+            </a>
+            <a
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="hover:text-blue-600"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </nav>
