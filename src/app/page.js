@@ -271,12 +271,12 @@ export default function Home() {
             <div className="w-full md:w-1/3 flex justify-center">
               <motion.div
                 whileHover={{ rotate: 10, scale: 1.1 }} // Goyang pas di-hover
-                className="relative w-48 h-48 bg-slate-800 dark:bg-slate-700 rounded-2xl rotate-3 flex items-center justify-center border-2 border-slate-700 shadow-2xl"
+                className="relative w-48 h-48 bg-slate-200 dark:bg-slate-700 rounded-2xl rotate-3 flex items-center justify-center border-2 border-slate-200 dark:border-slate-700 shadow-2xl"
               >
-                <div className="relative w-48 h-48 bg-slate-800 dark:bg-slate-700 rounded-2xl rotate-3 flex items-center justify-center border-2 border-slate-700 shadow-2xl">
+                <div className="relative w-48 h-48 bg-slate-200 dark:bg-slate-700 rounded-2xl rotate-3 flex items-center justify-center border-2 border-slate-200 dark:border-slate-700 shadow-2xl">
                   <div className="absolute inset-0 bg-blue-600 rounded-2xl -rotate-6 -z-10 opacity-10"></div>
                   <svg
-                    className="w-24 h-24 text-blue-400"
+                    className="w-24 h-24 text-slate-800 dark:text-blue-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -325,7 +325,7 @@ export default function Home() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.1 }} // Delay berurutan
                       viewport={{ once: true }}
-                      className="px-4 py-1.5 text-slate-600 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800"
+                      className="px-4 py-1.5 text-slate-600 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-200 dark:bg-slate-800"
                     >
                       {skill}
                     </motion.span>
@@ -415,7 +415,7 @@ export default function Home() {
       {/* SECTION 4: CONTACT */}
       <section
         id="contact"
-        className="min-h-screen flex items-center py-20 px-6 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors"
+        className="min-h-screen flex items-center py-20 px-6 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors"
       >
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
@@ -455,7 +455,7 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-100 dark:border-slate-800 py-12 px-6 bg-slate-50 dark:bg-slate-950 transition-colors">
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-12 px-6 bg-slate-50 dark:bg-slate-950 transition-colors">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
           <div>
             <div className="font-bold text-xl text-slate-900 dark:text-white mb-2">
