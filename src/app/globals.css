@@ -15,17 +15,37 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 10px; /* Lebar scrollbar */
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+::-webkit-scrollbar-track {
+  background: transparent; /* Background jalurnya transparan */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(37, 99, 235, 0.3); /* Warna biru (blue-600) transparan */
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 99, 235, 0.8); /* Makin terang pas di-hover */
+}
+
+/* Biar di Dark Mode tetap senada */
+.dark ::-webkit-scrollbar-track {
+  background: oklch(20.8% 0.042 265.755);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.3); /* Biru lebih muda (blue-400) */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: oklch(27.9% 0.041 260.031);
 }
 
 html {
