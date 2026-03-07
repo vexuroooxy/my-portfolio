@@ -12,8 +12,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Portfolio",
-  description: "My personal portfolio website.",
+  title: "Valdiaz Gahari | IoT & Web Developer",
+  description:
+    "Portfolio of Valdiaz Gahari, bridging Physical Hardware and Modern Web Ecosystems.",
 };
 
 export default function RootLayout({ children }) {
