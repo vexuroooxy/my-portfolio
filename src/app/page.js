@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -27,6 +28,14 @@ export default function Home() {
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <main className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-500`">
       {/* NAVBAR */}
@@ -210,34 +219,40 @@ export default function Home() {
 
       {/* SECTION 1: HOME (FULL SCREEN) */}
       <section className="min-h-screen flex items-center justify-center pt-20 px-6 text-center bg-slate-50 dark:bg-slate-950 transition-colors">
-        <div className="mx-auto max-w-4xl relative z-10">
-          <div className="relative inline-block p-1.5 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 mb-10 shadow-2xl">
-            <img
-              src="/profile.jpg"
-              className="w-44 h-44 rounded-full border-8 border-white dark:border-slate-900 object-cover transform hover:scale-105 transition-transform duration-500"
-              alt="Valdiaz Gahari"
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="mx-auto max-w-4xl relative z-10">
+            <div className="relative inline-block p-1.5 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 mb-10 shadow-2xl">
+              <img
+                src="/profile.jpg"
+                className="w-44 h-44 rounded-full border-8 border-white dark:border-slate-900 object-cover transform hover:scale-105 transition-transform duration-500"
+                alt="Valdiaz Gahari"
+              />
+            </div>
+
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white mb-6 leading-tight">
+              Hi, I'm{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-500">
+                Valdiaz Gahari
+              </span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
+              Bridging the gap between{" "}
+              <span className="font-semibold text-blue-700 dark:text-blue-400">
+                Physical Hardware
+              </span>{" "}
+              and{" "}
+              <span className="font-semibold text-purple-700 dark:text-purple-400">
+                Modern Web Ecosystems
+              </span>
+              .
+            </p>
           </div>
-
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white mb-6 leading-tight">
-            Hi, I'm{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-500">
-              Valdiaz Gahari
-            </span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
-            Bridging the gap between{" "}
-            <span className="font-semibold text-blue-700 dark:text-blue-400">
-              Physical Hardware
-            </span>{" "}
-            and{" "}
-            <span className="font-semibold text-purple-700 dark:text-purple-400">
-              Modern Web Ecosystems
-            </span>
-            .
-          </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* SECTION 2: ABOUT (FULL SCREEN) */}
@@ -245,64 +260,81 @@ export default function Home() {
         id="about"
         className="min-h-screen flex items-center py-20 px-6 bg-white dark:bg-slate-900 transition-colors"
       >
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
-          <div className="w-full md:w-1/3 flex justify-center">
-            <div className="relative w-48 h-48 bg-slate-800 dark:bg-slate-700 rounded-2xl rotate-3 flex items-center justify-center border-2 border-slate-700 shadow-2xl">
-              <div className="absolute inset-0 bg-blue-600 rounded-2xl -rotate-6 -z-10 opacity-10"></div>
-              <svg
-                className="w-24 h-24 text-blue-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+        <motion.div
+          initial={{ opacity: 0, x: -50 }} // Muncul dari kiri
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12"
+        >
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div className="w-full md:w-1/3 flex justify-center">
+              <motion.div
+                whileHover={{ rotate: 10, scale: 1.1 }} // Goyang pas di-hover
+                className="relative w-48 h-48 bg-slate-800 dark:bg-slate-700 rounded-2xl rotate-3 flex items-center justify-center border-2 border-slate-700 shadow-2xl"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <div className="w-full md:w-2/3">
-            <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
-              About Me
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-              Saya adalah seorang developer yang memiliki ketertarikan besar
-              pada dunia{" "}
-              <span className="text-blue-600 dark:text-blue-400 font-medium">
-                Internet of Things (IoT)
-              </span>{" "}
-              dan pengembangan web modern.
-            </p>
-            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-              Saat ini, saya fokus membangun ekosistem digital menggunakan{" "}
-              <span className="font-semibold text-slate-900 dark:text-white">
-                Laravel
-              </span>{" "}
-              dan{" "}
-              <span className="font-semibold text-slate-900 dark:text-white">
-                Next.js
-              </span>
-              .
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              {["PHP", "Laravel", "Next.js", "C++", "MySQL", "Tailwind"].map(
-                (skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-1.5 text-slate-600 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800"
+                <div className="relative w-48 h-48 bg-slate-800 dark:bg-slate-700 rounded-2xl rotate-3 flex items-center justify-center border-2 border-slate-700 shadow-2xl">
+                  <div className="absolute inset-0 bg-blue-600 rounded-2xl -rotate-6 -z-10 opacity-10"></div>
+                  <svg
+                    className="w-24 h-24 text-blue-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    {skill}
-                  </span>
-                ),
-              )}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                    />
+                  </svg>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="w-full md:w-2/3">
+              <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
+                About Me
+              </h2>
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                Saya adalah seorang developer yang memiliki ketertarikan besar
+                pada dunia{" "}
+                <span className="text-blue-600 dark:text-blue-400 font-medium">
+                  Internet of Things (IoT)
+                </span>{" "}
+                dan pengembangan web modern.
+              </p>
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                Saat ini, saya fokus membangun ekosistem digital menggunakan{" "}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  Laravel
+                </span>{" "}
+                dan{" "}
+                <span className="font-semibold text-slate-900 dark:text-white">
+                  Next.js
+                </span>
+                .
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                {["PHP", "Laravel", "Next.js", "C++", "MySQL", "Tailwind"].map(
+                  (skill, index) => (
+                    <motion.span
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 }} // Delay berurutan
+                      viewport={{ once: true }}
+                      className="px-4 py-1.5 text-slate-600 dark:text-slate-300 text-xs font-bold rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800"
+                    >
+                      {skill}
+                    </motion.span>
+                  ),
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* SECTION 3: PROJECTS (FULL SCREEN) */}
@@ -311,15 +343,22 @@ export default function Home() {
         className="min-h-screen flex items-center py-20 px-6 bg-slate-50 dark:bg-slate-950"
       >
         <div className="max-w-5xl mx-auto w-full">
-          <h2 className="text-2xl font-bold mb-10 border-b-2 border-blue-500 w-fit text-slate-900 dark:text-white mx-auto md:mx-0">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }} // Animasi jalan pas section ini kelihatan di layar
+            viewport={{ once: true }}
+            className="text-2xl font-bold mb-10 border-b-2 border-blue-500 w-fit"
+          >
             Featured Projects
-          </h2>
+          </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {/* Card RFID */}
-            <div className="group overflow-hidden rounded-2xl border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl transition-all duration-300">
+            <motion.div
+              whileHover={{ y: -10 }}
+              className="group overflow-hidden rounded-2xl border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl transition-all duration-300"
+            >
               <div className="h-48 bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
-                {/* Pastikan file ini ada di /public atau ganti sementara ke URL luar jika belum ada */}
                 <img
                   src="/ss-rfid.jpg"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -340,10 +379,13 @@ export default function Home() {
                   <span>#LARAVEL</span> <span>#ESP32</span> <span>#MYSQL</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Card Finance */}
-            <div className="group overflow-hidden rounded-2xl border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl transition-all duration-300">
+            <motion.div
+              whileHover={{ y: -10 }}
+              className="group overflow-hidden rounded-2xl border border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl transition-all duration-300"
+            >
               <div className="h-48 bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
                 <img
                   src="/ss-finance.jpg"
@@ -365,7 +407,7 @@ export default function Home() {
                   <span>#REACT</span> <span>#NODEJS</span> <span>#MONGODB</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -376,28 +418,39 @@ export default function Home() {
         className="min-h-screen flex items-center py-20 px-6 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors"
       >
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
-            Let's Work Together!
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 mb-10">
-            Tertarik kolaborasi atau ingin dibuatkan sistem kustom? Yuk,
-            ngobrol!
-          </p>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            <a
-              href="https://wa.me/6287805795220"
-              target="_blank"
-              className="flex items-center gap-3 px-8 py-4 bg-green-500 text-white rounded-2xl font-bold hover:bg-green-600 hover:shadow-lg hover:-translate-y-1 transition-all w-full md:w-auto"
-            >
-              Chat on WhatsApp
-            </a>
-            <a
-              href="mailto:gaharivaldiaz19@gmail.com"
-              className="flex items-center gap-3 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-2xl font-bold hover:bg-slate-200 dark:hover:bg-slate-700 hover:-translate-y-1 transition-all w-full md:w-auto border border-slate-200 dark:border-slate-700"
-            >
-              Send Email
-            </a>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
+              Let's Work Together!
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-10">
+              Tertarik kolaborasi atau ingin dibuatkan sistem kustom? Yuk,
+              ngobrol!
+            </p>
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="https://wa.me/6287805795220"
+                target="_blank"
+                className="flex items-center gap-3 px-8 py-4 bg-green-500 text-white rounded-2xl font-bold hover:bg-green-600 shadow-lg transition-all w-full md:w-auto"
+              >
+                Chat on WhatsApp
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="mailto:gaharivaldiaz19@gmail.com"
+                className="flex items-center gap-3 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-2xl font-bold border border-slate-200 dark:border-slate-700 transition-all w-full md:w-auto"
+              >
+                Send Email
+              </motion.a>
+            </div>
+          </motion.div>
         </div>
       </section>
 
