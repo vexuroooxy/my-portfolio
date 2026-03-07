@@ -2,6 +2,27 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 export default function Home() {
+  const name = "Valdiaz Gahari";
+  const roles = ["IoT Developer", "Web Developer", "Tech Enthusiast"];
+
+  const [currentRole, setCurrentRole] = useState(0);
+
+  const sentence = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        staggerChildren: 0.08, // Kecepatan ngetik per huruf
+      },
+    },
+  };
+
+  const letter = {
+    hidden: { opacity: 0, display: "none" },
+    visible: { opacity: 1, display: "inline" },
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     // Inisialisasi tema saat pertama kali load
@@ -233,24 +254,47 @@ export default function Home() {
               />
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-950 dark:text-white mb-6 leading-tight">
+            <motion.h1
+              variants={sentence}
+              initial="hidden"
+              animate="visible"
+              className="text-5xl md:text-7xl font-extrabold mb-6"
+            >
               Hi, I'm{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-500">
-                Valdiaz Gahari
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-darkblue to-slate-500 dark:from-blue-600 dark:to-purple-500">
+                {name.split("").map((char, index) => (
+                  <motion.span key={index} variants={letter}>
+                    {char}
+                  </motion.span>
+                ))}
               </span>
-            </h1>
+              <motion.span
+                animate={{ opacity: [0, 1, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 0.8,
+                  delay: 0.5 + name.length * 0.08,
+                }}
+                className="inline-block w-1 h-12 md:h-16 bg-slate-800 dark:bg-slate-200 ml-1"
+              ></motion.span>
+            </motion.h1>
 
-            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2 }} // Muncul setelah nama selesai diketik
+              className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+            >
               Bridging the gap between{" "}
-              <span className="font-semibold text-blue-700 dark:text-blue-400">
+              <span className="font-semibold text-darkblue dark:text-blue-600">
                 Physical Hardware
               </span>{" "}
               and{" "}
-              <span className="font-semibold text-purple-700 dark:text-purple-400">
+              <span className="font-semibold text-slate-500 dark:text-purple-500">
                 Modern Web Ecosystems
               </span>
               .
-            </p>
+            </motion.p>
           </div>
         </motion.div>
       </section>
